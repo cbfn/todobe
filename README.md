@@ -1,24 +1,15 @@
-# README
+# RAILS API for todo example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+> Before setup you must have ruby and node installed in your computer or docker machine.
 
-* Ruby version
+```bash
+$ git clone git@github.com:cnascimentord/todobe.git
+$ cd todobe
+$ bundle install
+$ rake db:migrate
+$ rails s
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Visit `http://localhost:3000`
