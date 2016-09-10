@@ -4,9 +4,9 @@ module Api::V1
 
     # GET /todos
     def index
-      @todos = Todo.all
 
-      render json: @todos
+      todos = Todo.page(params[:page] ? params[:page][:number] : 1)
+      render json: todos, meta: pagination_meta(todos)
     end
 
     # GET /todos/1
@@ -48,6 +48,16 @@ module Api::V1
       # Only allow a trusted parameter "white list" through.
       def todo_params
         params.require(:todo).permit(:title, :completed, :order)
+      end
+
+      def pagination_meta(object)
+        {
+          current_page: object.current_page,
+          next_page: object.next_page,
+          prev_page: object.previous_page,
+          total_pages: object.total_pages,
+          total_count: object.total_entries
+        }
       end
 
   end
