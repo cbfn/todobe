@@ -5,8 +5,10 @@ module Api::V1
     # GET /todos
     def index
 
-      todos = Todo.page(params[:page] ? params[:page][:number] : 1)
-      render json: todos, meta: pagination_meta(todos)
+      @todos = Todo.all
+      #todos = Todo.page(params[:page] ? params[:page][:number] : 1)
+      render json: @todos
+      #render json: todos, meta: pagination_meta(todos)
     end
 
     # GET /todos/1
