@@ -1,12 +1,15 @@
 module Api::V1
   class TodosController < ApiController
+    include ErrorSerializer
     before_action :set_todo, only: [:show, :update, :destroy]
 
     # GET /todos
     def index
 
-      todos = Todo.page(params[:page] ? params[:page][:number] : 1)
-      render json: todos, meta: pagination_meta(todos)
+      @todos = Todo.all
+      #todos = Todo.page(params[:page] ? params[:page][:number] : 1)
+      render json: @todos
+      #render json: todos, meta: pagination_meta(todos)
     end
 
     # GET /todos/1
@@ -21,6 +24,7 @@ module Api::V1
       if @todo.save
         render json: @todo, status: :created
       else
+        # render json: ErrorSerializer.serialize(@todo.errors)
         render json: @todo.errors, status: :unprocessable_entity
       end
     end
